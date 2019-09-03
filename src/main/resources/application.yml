@@ -1,0 +1,34 @@
+spring:
+  mvc:
+    static-path-pattern: /resources/**
+  application:
+    name: test
+  thymeleaf:
+      check-template: true
+      check-template-location: true
+      enabled: true
+      encoding: UTF-8
+      mode: HTML
+  datasource:
+    url: jdbc:postgresql://localhost:5432/test
+    username: postgres
+    password: 1234
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      connectionTimeout: 30000
+      idleTimeout: 600000
+      maxLifetime: 1800000
+      maximumPoolSize: 20
+  jpa:
+    properties:
+      hibernate:
+        jdbc:
+          lob:
+            non_contextual_creation: true
+        format_sql: true
+        ddl-auto: create
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+    show-sql: true
+server:
+  port: 8081
+

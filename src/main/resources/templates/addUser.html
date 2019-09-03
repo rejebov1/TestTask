@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form th:action="@{/user/new}" method="post" >
+    <div><label> User Name : <input type="text" name="username" placeholder="Enter username"
+                                    pattern="(.+)(.+)${3,}"
+                                    title="Username must contain minimum 3 characters"
+                                    class="form-control input-md" required=""> </label></div>
+    <div><label> Password: <input type="password" name="password" placeholder="Enter password"
+                                  pattern="(.+)(.+)${3,}"
+                                  title="Password must contain minimum 3 characters"
+                                  class="form-control input-md" required=""> </label></div>
+    <div><label> First name: <input type="text" name="firstName" placeholder="Enter first name"
+                                    pattern="(.+)(.+)${1,}"
+                                    title="First name must contain minimum 1 letter "
+                                    class="form-control input-md" required=""> </label></div>
+    <div><label> Last name: <input type="text" name="lastName" placeholder="Enter last name"
+                                   pattern="(.+)(.+)${1,}"
+                                   title=" Last name must contain minimum 1 letter "
+                                   class="form-control input-md" required=""> </label></div>
+
+    <p><b>ROLE:</b></p>
+    <p><label>
+        <input name="role" type="radio" value="USER">
+    </label> USER</p>
+    <p><label>
+        <input name="role" type="radio" value="ADMIN">
+    </label> ADMIN</p>
+    <div><input type="submit" value="Add"/></div>
+</form>
+</body>
+</html>

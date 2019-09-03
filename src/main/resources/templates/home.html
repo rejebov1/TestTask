@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+</head>
+<body>
+
+<!--header -->
+<div th:fragment="navbar">
+    <nav class="navbar navbar-inverse">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" th:href="@{/home}">Home</a>
+            </div>
+            <div id="navbar" class="collapse navbar-collapse navbar-right">
+                <ul class="nav navbar-nav" sec:authorize="isAuthenticated()">
+                    <li class="active"><a th:href="@{/user}">Users list</a></li>
+                </ul>
+
+                <div sec:authorize="hasAnyAuthority('ADMIN')">
+                    <ul class="nav navbar-nav">
+                        <li class="active"><a th:href="@{user/new}">Add new user</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div sec:authorize="isAuthenticated()">
+                <ul>
+                    <li><a th:href="@{/logout}">Logout</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</div>
+</body>
+</html>

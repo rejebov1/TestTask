@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+    <meta charset="UTF-8">
+    <title>Users list</title>
+</head>
+<body>
+<div class="panel-default well" th:each="user : ${user}">
+    <div class="panel-heading">
+        <h1 th:text="${user.username}"></h1>
+    </div>
+    <div class="row panel-footer">
+        <div th:inline="text" class="col-md-2">First name: [[${user.firstName}]]</div>
+        <div th:inline="text" class="col-md-2">Last name: [[${user.lastName}]]</div>
+        <div th:inline="text" class="col-md-2">Status: [[${user.isActive}]]</div>
+        <div th:inline="text" class="col-md-2">Role: [[${user.role}]]</div>
+        <div th:inline="text" class="col-md-9">Created at: [[${user.createdAt}]]</div>
+
+        <div th:switch="${user.isActive}">
+            <span th:case="${user.isActive}">ACTIVE</span>
+            <button class="btn btn-warning blockUser" userId="${user.getId()}">Block</button>
+            <span th:case="${!user.isActive}">INACTIVE</span>
+            <button class="btn btn-success unblockUser" userId="${user.getId()}">Unblock</button>
+        </div>
+        <div sec:authorize="hasAnyAuthority('ADMIN')">
+            <a th:href="@{'/{id}/edit'(id=${user.id})}">
+                <span class="glyphicon glyphicon-info-sign">Edit</span>
+            </a>
+        </div>
+    </div>
+</div>
+</body>
+</html>
